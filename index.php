@@ -17,7 +17,10 @@
         <title>Scrapping siksha</title>
     </head>
     <body>
-        search
-        <input type="text" placeholder="enter city url";
+        <form action="scrape.php" method="post">
+            <input type="text" name="url" placeholder="enter city url">
+            <br>
+            <input type="submit" value="search">
+        </form>
     </body>
 </html>
