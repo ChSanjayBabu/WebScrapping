@@ -9,28 +9,27 @@
     </head>
     <body>
         <script>/*global $*/
+        var i = 1;
+
         function func()
         {
-            var i = 1;
             var x = $("input:text").val();
-            $("#test1").html(x);
-            while(i)
-            {
                 $.ajax({
                 url: "scrape.php",
+                async : true,
                 data: {url : x},
                 type: 'GET',
                 success: function(datastring) {
-                    x = datastring;
+                    var x = datastring;
                     console.log('request through ajax is done');
                     console.log(x);
-                    $("#test1").html(x);
+                    $("input:text").val(x);
+                    if(x != "0") func();
                 }
                 });
-            }
         }
         </script>
-        <div id="test1">3</div>
+        <div id="test1"></div>
             <input id = "name" placeholder = "type url" type = "text" name="url">
             <input type = "button" value = "search" onclick = "func();">
     </body>
