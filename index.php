@@ -12,7 +12,8 @@
         $(document).ajaxStart(function() {
         $('#loading').show(); // show the gif image when ajax starts
         }).ajaxStop(function() {
-            $('#loading').hide(); // hide the gif image when ajax completes
+            $('#loading').hide();
+            $("#test1").show();// hide the gif image when ajax completes
         });
         function load()
         {
@@ -39,7 +40,9 @@
                 });
         }
         </script>
-        <div id="test1"></div>
+        <div id="test1">
+            <a href="display.php">show details</a>
+        </div>
             <input id = "name" placeholder = "type url" type = "text" name="url">
             <input id = "butt" type = "button" value = "search" onclick = "load();">
         <div id="loading" hidden style="vertical-align:middle; text-align:center">
