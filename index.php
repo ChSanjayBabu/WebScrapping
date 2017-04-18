@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if(!isset($_SESSION["clear"]))
+    {
+        $_SESSION["clear"] = "true";
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,7 +44,7 @@
                 });
         }
         </script>
-        <div id="test1">
+        <div id="test1" hidden>
             <a href="display.php">show details</a>
         </div>
             <input id = "name" placeholder = "type url" type = "text" name="url">

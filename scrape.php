@@ -9,6 +9,11 @@
     die('Could not connect: ' . mysql_error());
     }
     $db = mysqli_select_db($conn,'project1');
+    if($_SESSION["clear"] == "true")
+    {
+        $_SESSION["clear"] = "false";
+         mysqli_query($conn,"TRUNCATE TABLE details"); 
+    }
     $url = $_GET["url"];
     $html = file_get_contents($url);
     preg_match_all('/(?<=blank">)(.*)<\/a>\n<p>\| (.*)<\/p><\/h2>/',$html,$coll_add);
