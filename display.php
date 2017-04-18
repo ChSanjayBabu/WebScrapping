@@ -9,7 +9,12 @@
     die('Could not connect: ' . mysql_error());
     }
     $db = mysqli_select_db($conn,'project1');
-    $list = mysqli_query($conn,"SELECT * FROM details")
+    $list = mysqli_query($conn,"SELECT * FROM details");
+    session_start();
+    $_SESSION["clear"] = "";
+    session_unset();
+    session_destroy();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,3 +38,6 @@
             
     </body>
 </html>
+<?php
+    mysqli_close($conn);
+?>

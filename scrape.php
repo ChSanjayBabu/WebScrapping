@@ -2,6 +2,7 @@
     $host = "localhost";
     $user = "sanjay_ch";
     $pass = "3vXt73bGW7mEcGnI";
+    session_start();
     
     $conn = mysqli_connect($host,$user,$pass);
     if (!$conn) 
@@ -16,15 +17,15 @@
     }
     $url = $_GET["url"];
     $html = file_get_contents($url);
-    preg_match_all('/(?<=blank">)(.*)<\/a>\n<p>\| (.*)<\/p><\/h2>/',$html,$coll_add);
-    preg_match_all('/facility-icons|(?<=<h3>).*(?=<\/h3>\n<p>)|(?<=<span><b>).*(?=<\/b>)/'
+    preg_match_all("/(?<=blank.>)(.*)<\/a>\n<p>\| (.*)<\/p><\/h2>/",$html,$coll_add);
+    preg_match_all("/Add to Compare|(?<=<h3>).*(?=<\/h3>\n<p>)|(?<=<span><b>).*(?=<\/b>)/"
         ,$html,$faclties_revw);
     $faclty_text = null;
     $i = 0;
     $count = 0;
     foreach ($faclties_revw[0] as $faclty)
     {
-        if ($faclty != 'facility-icons')
+        if($faclty != "Add to Compare")
         {
             if(!is_numeric($faclty))
             {
@@ -32,7 +33,7 @@
             }
             
         }
-        else if($faclty_text != null)
+        else
         {
             if(is_numeric($faclties_revw[0][($count)-1]))
             {
@@ -43,7 +44,7 @@
                 $num = 0;
             }
             $faclty_text = rtrim($faclty_text,", ");
-            mysqli_query($conn,"INSERT IGNORE INTO details (college, location, facilities, reviews)
+            mysqli_query($conn,"INSERT INTO details (college, location, facilities, reviews)
                 VALUES ('{$coll_add[1][$i]}', '{$coll_add[2][$i]}', '{$faclty_text}', '{$num}')");
             $i++;
             
